@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         char[] charCap = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
         char[] charLower = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         char[] charSym = "~`!@#$%^&*()-_=+[{]};:\\|'\",<.>/?".toCharArray();
-        char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890~`!@#$%^&*()-_=+[{]};:\\|'\",<.>/?".toCharArray();
+        char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz12345678901234567890~`!@#$%^&*()-_=+[{]};:\\|'\",<.>/?".toCharArray();
 
         /**************************************************************
         These are booleans to determine if a character has been put into the string that will become the password.
@@ -161,42 +161,98 @@ public class MainActivity extends AppCompatActivity {
                 //Toast.makeText(MainActivity.this, "number found", Toast.LENGTH_SHORT).show();
                 numPresent = true;
             }
-            if (new String(charCap).contains(charString)){
+            if (new String(charCap).contains(charString)) {
                 //Toast.makeText(MainActivity.this, "capitals present", Toast.LENGTH_SHORT).show();
                 capitalPresent = true;
 
             }
-            if (new String(charLower).contains(charString)){
+            if (new String(charLower).contains(charString)) {
                 lowercasePresent = true;
             }
-            if (new String(charSym).contains(charString)){
+            if (new String(charSym).contains(charString)) {
                 symbolPresent = true;
             }
 
             //Check to see if values are present but not wanted
-            if (i == passLength && capitalPresent && !upperChecked) {
-                Log.d("Test", "Capitals present but not wanted");
-                password.setLength(0);
-                i = 0; //Setting the i to 0 is what breaks it, but dont know why!!!!
+            if (i == passLength) {
+                if (!capitalPresent && upperChecked) {
+                    Log.d("Test", "Capitals wanted but not present");
+                    password.setLength(0);
+                    i = 0; //Setting the i to 0 is what breaks it, but dont know why!!!!
+                    numPresent = false;
+                    capitalPresent = false;
+                    lowercasePresent = false;
+                    symbolPresent = false;
+                }
 
-            }
+                if (!lowercasePresent && lowerChecked) {
+                    Log.d("Test", "Lowercase wanted but not present");
+                    password.setLength(0);
+                    i = 0;
+                    numPresent = false;
+                    capitalPresent = false;
+                    lowercasePresent = false;
+                    symbolPresent = false;
+                }
 
-            if (i == passLength && lowercasePresent && !lowerChecked) {
-                Log.d("Test", "Lowercase present but not wanted");
-                password.setLength(0);
-                i = 0;
-            }
+                if (!numPresent && numChecked) {
+                    Log.d("Test", "Numbers wanted but not present");
+                    password.setLength(0);
+                    i = 0;
+                    numPresent = false;
+                    capitalPresent = false;
+                    lowercasePresent = false;
+                    symbolPresent = false;
+                }
 
-            if (i == passLength && numPresent && !numChecked) {
-                Log.d("Test", "Numbers present but not wanted");
-                password.setLength(0);
-                i = 0;
-            }
+                if (!symbolPresent && symChecked) {
+                    Log.d("Test", "Symbols wanted but not present");
+                    password.setLength(0);
+                    i = 0;
+                    numPresent = false;
+                    capitalPresent = false;
+                    lowercasePresent = false;
+                    symbolPresent = false;
+                }
+                if (capitalPresent && !upperChecked) {
+                    Log.d("Test", "Capitals present but not wanted");
+                    password.setLength(0);
+                    i = 0; //Setting the i to 0 is what breaks it, but dont know why!!!!
+                    numPresent = false;
+                    capitalPresent = false;
+                    lowercasePresent = false;
+                    symbolPresent = false;
+                }
 
-            if (i == passLength && symbolPresent && !symChecked) {
-                Log.d("Test", "Symbols present but not wanted");
-                password.setLength(0);
-                i = 0;
+                if (lowercasePresent && !lowerChecked) {
+                    Log.d("Test", "Lowercase present but not wanted");
+                    password.setLength(0);
+                    i = 0;
+                    numPresent = false;
+                    capitalPresent = false;
+                    lowercasePresent = false;
+                    symbolPresent = false;
+                }
+
+                if (numPresent && !numChecked) {
+                    Log.d("Test", "Numbers present but not wanted");
+                    password.setLength(0);
+                    i = 0;
+                    numPresent = false;
+                    capitalPresent = false;
+                    lowercasePresent = false;
+                    symbolPresent = false;
+                }
+
+                if (symbolPresent && !symChecked) {
+                    Log.d("Test", "Symbols present but not wanted");
+                    password.setLength(0);
+                    i = 0;
+                    numPresent = false;
+                    capitalPresent = false;
+                    lowercasePresent = false;
+                    symbolPresent = false;
+                }
             }
 
             i++;
