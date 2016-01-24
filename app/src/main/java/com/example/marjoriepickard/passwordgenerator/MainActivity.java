@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -98,47 +97,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String passwordGenerate () {
-        //TODO: refine algorithm
 
-        /*Arrays of the characters arranged by type and one large one combined
-        (Could be refined, storing the array somewhere else? adding the smaller type arrays together based on what the user wants?*/
+        //Arrays of the characters arranged by type
+        //TODO:
         char[] charNum = "0123456789".toCharArray();
         char[] charCap = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
         char[] charLower = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         char[] charSym = "~`!@#$%^&*()-_=+[{]};:\\|'\",<.>/?".toCharArray();
-        char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz12345678901234567890~`!@#$%^&*()-_=+[{]};:\\|'\",<.>/?".toCharArray();
 
-        /**************************************************************
-        These are booleans to determine if a character has been put into the string that will become the password.
-        for example: if a number is added to the string, the numPresent boolean will be set to true.
-        I imagined that after the string has been built, If statements could be used to determine if the values of the
-        booleans below matched what the user wanted.  So if a user wants numbers, the numPresent boolean must match the
-        numChecked boolean which is determined by what checkboxes the user picks. Otherwise the password will be reset
-        and the password process starts over.  This is where it usually breaks.  It is works almost perfectly if I ask it to reset the
-        password and start over if it is searching for an unwanted character.  The code for that is below.
-        ex.
-        if (new String(charNum).contains(charString) && !numChecked) {
-            password.setLength(0);
-            i = 0;
-            }
-        if (new String(charCap).contains(charString) && !upperChecked) {
-                    password.setLength(0);
-            i = 0;
-            }
-        if (new String(charLower).contains(charString) && !lowerChecked) {
-            password.setLength(0);
-            i = 0;
-            }
-        if (new String(charSym).contains(charString) && !symChecked) {
-            password.setLength(0);
-            i = 0;
-            }
+        StringBuilder characters = new StringBuilder();
+        if (upperChecked)
+            characters.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        if (lowerChecked)
+            characters.append("abcdefghijklmnopqrstuvwxyz");
+        if (numChecked)
+            characters.append("01234567890123456789");
+        if(symChecked)
+            characters.append("~`!@#$%^&*()-_=+[{]};:\\|'\",<.>/?");
 
-        However, this only makes sure that a no unwanted character make it into the password, not that the password
-        contains the wanted characters
+        String str = characters.toString();
+        char[] chars = str.toCharArray();
 
-        I have tried using while loops and for loops, neither works.
-         ****************************************************************************************/
         boolean numPresent = false;
         boolean capitalPresent = false;
         boolean lowercasePresent = false;
@@ -158,11 +137,9 @@ public class MainActivity extends AppCompatActivity {
             //Booleans to check if the different types of characters are present
             String charString = Character.toString(ci);  //convert from character to string
             if (new String(charNum).contains(charString)) {
-                //Toast.makeText(MainActivity.this, "number found", Toast.LENGTH_SHORT).show();
                 numPresent = true;
             }
             if (new String(charCap).contains(charString)) {
-                //Toast.makeText(MainActivity.this, "capitals present", Toast.LENGTH_SHORT).show();
                 capitalPresent = true;
 
             }
@@ -176,9 +153,8 @@ public class MainActivity extends AppCompatActivity {
             //Check to see if values are present but not wanted
             if (i == passLength) {
                 if (!capitalPresent && upperChecked) {
-                    Log.d("Test", "Capitals wanted but not present");
                     password.setLength(0);
-                    i = 0; //Setting the i to 0 is what breaks it, but dont know why!!!!
+                    i = 0;
                     numPresent = false;
                     capitalPresent = false;
                     lowercasePresent = false;
@@ -186,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (!lowercasePresent && lowerChecked) {
-                    Log.d("Test", "Lowercase wanted but not present");
                     password.setLength(0);
                     i = 0;
                     numPresent = false;
@@ -196,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (!numPresent && numChecked) {
-                    Log.d("Test", "Numbers wanted but not present");
                     password.setLength(0);
                     i = 0;
                     numPresent = false;
@@ -206,46 +180,6 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (!symbolPresent && symChecked) {
-                    Log.d("Test", "Symbols wanted but not present");
-                    password.setLength(0);
-                    i = 0;
-                    numPresent = false;
-                    capitalPresent = false;
-                    lowercasePresent = false;
-                    symbolPresent = false;
-                }
-                if (capitalPresent && !upperChecked) {
-                    Log.d("Test", "Capitals present but not wanted");
-                    password.setLength(0);
-                    i = 0; //Setting the i to 0 is what breaks it, but dont know why!!!!
-                    numPresent = false;
-                    capitalPresent = false;
-                    lowercasePresent = false;
-                    symbolPresent = false;
-                }
-
-                if (lowercasePresent && !lowerChecked) {
-                    Log.d("Test", "Lowercase present but not wanted");
-                    password.setLength(0);
-                    i = 0;
-                    numPresent = false;
-                    capitalPresent = false;
-                    lowercasePresent = false;
-                    symbolPresent = false;
-                }
-
-                if (numPresent && !numChecked) {
-                    Log.d("Test", "Numbers present but not wanted");
-                    password.setLength(0);
-                    i = 0;
-                    numPresent = false;
-                    capitalPresent = false;
-                    lowercasePresent = false;
-                    symbolPresent = false;
-                }
-
-                if (symbolPresent && !symChecked) {
-                    Log.d("Test", "Symbols present but not wanted");
                     password.setLength(0);
                     i = 0;
                     numPresent = false;
@@ -276,37 +210,28 @@ public class MainActivity extends AppCompatActivity {
         set the corresponding boolean to true, if it was unchecked, set the boolean to false*/
         switch(view.getId()) {
             case R.id.capLetCheckBox:
-                if (checked){
+                if (checked)
                     upperChecked = true;
-                }
-                else {
+                else
                     upperChecked = false;
-                    Log.i("Testing", "Capitals wanted");
-                }
                 break;
             case R.id.lowerCheckBox:
-                if(checked) {
+                if(checked)
                     lowerChecked = true;
-                }
-                else {
+                else
                     lowerChecked = false;
-                }
                 break;
             case R.id.numCheckBox:
-                if (checked){
+                if (checked)
                     numChecked = true;
-                }
-                else {
+                else
                     numChecked = false;
-                }
                 break;
             case R.id.symCheckBox:
-                if (checked){
+                if (checked)
                     symChecked = true;
-                }
-                else {
+                else
                     symChecked = false;
-                }
                 break;
 
         }
