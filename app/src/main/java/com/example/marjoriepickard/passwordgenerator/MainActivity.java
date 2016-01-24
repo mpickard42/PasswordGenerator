@@ -12,6 +12,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import java.util.Random;
 
+//TODO: make the password copieable
+
 public class MainActivity extends AppCompatActivity {
 
     //Global Variables
@@ -29,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
     boolean upperChecked = true;
     int passLength;
     String password;
+    boolean numPresent = false;
+    boolean capitalPresent = false;
+    boolean lowercasePresent = false;
+    boolean symbolPresent = false;
 
 
     @Override
@@ -99,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     public String passwordGenerate () {
 
         //Arrays of the characters arranged by type
-        //TODO:
+        //TODO:declare arrays elsewhere?
         char[] charNum = "0123456789".toCharArray();
         char[] charCap = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
         char[] charLower = "abcdefghijklmnopqrstuvwxyz".toCharArray();
@@ -118,10 +124,7 @@ public class MainActivity extends AppCompatActivity {
         String str = characters.toString();
         char[] chars = str.toCharArray();
 
-        boolean numPresent = false;
-        boolean capitalPresent = false;
-        boolean lowercasePresent = false;
-        boolean symbolPresent = false;
+
 
 
         StringBuilder password = new StringBuilder();
@@ -155,37 +158,25 @@ public class MainActivity extends AppCompatActivity {
                 if (!capitalPresent && upperChecked) {
                     password.setLength(0);
                     i = 0;
-                    numPresent = false;
-                    capitalPresent = false;
-                    lowercasePresent = false;
-                    symbolPresent = false;
+                    setBooleansFalse();
                 }
 
                 if (!lowercasePresent && lowerChecked) {
                     password.setLength(0);
                     i = 0;
-                    numPresent = false;
-                    capitalPresent = false;
-                    lowercasePresent = false;
-                    symbolPresent = false;
+                    setBooleansFalse();
                 }
 
                 if (!numPresent && numChecked) {
                     password.setLength(0);
                     i = 0;
-                    numPresent = false;
-                    capitalPresent = false;
-                    lowercasePresent = false;
-                    symbolPresent = false;
+                    setBooleansFalse();
                 }
 
                 if (!symbolPresent && symChecked) {
                     password.setLength(0);
                     i = 0;
-                    numPresent = false;
-                    capitalPresent = false;
-                    lowercasePresent = false;
-                    symbolPresent = false;
+                    setBooleansFalse();
                 }
             }
 
@@ -200,6 +191,13 @@ public class MainActivity extends AppCompatActivity {
         upperChecked = true;
         //check the box in the UI
         capLetCheckBox.setChecked(true);
+    }
+
+    public void setBooleansFalse() {
+        numPresent = false;
+        capitalPresent = false;
+        lowercasePresent = false;
+        symbolPresent = false;
     }
 
     public void onCheckboxClicked (View view) {
