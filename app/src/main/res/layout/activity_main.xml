@@ -44,10 +44,10 @@
         android:text="@string/Capital_Letters"
         android:id="@+id/capLetCheckBox"
         android:checked="true"
+        android:onClick="onCheckboxClicked"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="onCheckboxClicked"/>
+        android:layout_alignParentStart="true" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -55,10 +55,10 @@
         android:text="@string/Numbers"
         android:id="@+id/numCheckBox"
         android:checked="false"
-        android:layout_alignTop="@+id/capLetCheckBox"
-        android:layout_toRightOf="@+id/includeText"
-        android:layout_toEndOf="@+id/includeText"
-        android:onClick="onCheckboxClicked"/>
+        android:onClick="onCheckboxClicked"
+        android:layout_above="@+id/symCheckBox"
+        android:layout_toRightOf="@+id/btnGenerate"
+        android:layout_toEndOf="@+id/btnGenerate" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -85,11 +85,11 @@
         android:layout_height="wrap_content"
         android:text="@string/Lowercase_Letters"
         android:id="@+id/lowerCheckBox"
-        android:layout_below="@+id/capLetCheckBox"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:checked="false"
-        android:onClick="onCheckboxClicked"/>
+        android:onClick="onCheckboxClicked"
+        android:layout_below="@+id/capLetCheckBox"
+        android:layout_alignLeft="@+id/capLetCheckBox"
+        android:layout_alignStart="@+id/capLetCheckBox" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -97,6 +97,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/passwordTextView"
         android:text="Large_Text"
+        android:layout_marginBottom="34dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
