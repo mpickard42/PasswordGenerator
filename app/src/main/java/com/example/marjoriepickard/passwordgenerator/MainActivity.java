@@ -12,7 +12,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import java.util.Random;
 
-//TODO: make the password copieable
+//TODO: make the password copi
 
 public class MainActivity extends AppCompatActivity {
 

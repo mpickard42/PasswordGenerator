@@ -6,7 +6,7 @@
     <string name="Capital_Letters">Capital Letters (default)</string>
     <string name="Numbers">Numbers</string>
     <string name="Symbols">Symbols</string>
-    <string name="Include">Include</string>
+    <string name="Include">Include:</string>
     <string name="Lowercase_Letters">Lowercase Letters</string>
     <string name="Large_Text">Large Text</string>
     <string name="action_settings">Settings</string>
